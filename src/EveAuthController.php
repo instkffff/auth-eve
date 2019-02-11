@@ -54,8 +54,8 @@ class EveAuthController implements RequestHandlerInterface
         $redirectUri = (string) $request->getAttribute('originalUri', $request->getUri())->withQuery('');
 
         $provider = new EveOnline([
-            'clientId' => $this->settings->get('flarum-auth-eve.client_id'),
-            'clientSecret' => $this->settings->get('flarum-auth-eve.client_secret'),
+            'clientId' => $this->settings->get('instkffff-auth-eve.client_id'),
+            'clientSecret' => $this->settings->get('instkffff-auth-eve.client_secret'),
             'redirectUri' => $redirectUri
         ]);
 

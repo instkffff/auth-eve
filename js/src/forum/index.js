@@ -3,14 +3,14 @@ import app from 'flarum/app';
 import LogInButtons from 'flarum/components/LogInButtons';
 import LogInButton from 'flarum/components/LogInButton';
 
-app.initializers.add('flarum-auth-eve', () => {
+app.initializers.add('instkffff-auth-eve', () => {
   extend(LogInButtons.prototype, 'items', function(items) {
-    items.add('eve',
+    items.add('eveonline',
       <LogInButton
         className="Button LogInButton--eve"
         icon="fab fa-github"
         path="/auth/eve">
-        {app.translator.trans('flarum-auth-eve.forum.log_in.with_eve_button')}
+        {app.translator.trans('instkffff-auth-eve.forum.log_in.with_eve_button')}
       </LogInButton>
     );
   });
