@@ -21,5 +21,5 @@ return [
         ->js(__DIR__.'/js/dist/admin.js'),
 
     (new Extend\Routes('forum'))
-        ->get('/auth/eve', 'auth.eve', GithubAuthController::class),
+        ->get('/auth/eve', 'auth.eve', EveAuthController::class),
 ];
