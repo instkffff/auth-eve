@@ -3,14 +3,14 @@ import app from 'flarum/app';
 import LogInButtons from 'flarum/components/LogInButtons';
 import LogInButton from 'flarum/components/LogInButton';
 
-app.initializers.add('flarum-auth-github', () => {
+app.initializers.add('flarum-auth-eve', () => {
   extend(LogInButtons.prototype, 'items', function(items) {
-    items.add('github',
+    items.add('eve',
       <LogInButton
-        className="Button LogInButton--github"
+        className="Button LogInButton--eve"
         icon="fab fa-github"
-        path="/auth/github">
-        {app.translator.trans('flarum-auth-github.forum.log_in.with_github_button')}
+        path="/auth/eve">
+        {app.translator.trans('flarum-auth-eve.forum.log_in.with_eve_button')}
       </LogInButton>
     );
   });

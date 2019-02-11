@@ -1,7 +1,7 @@
 import app from 'flarum/app';
 
-import GithubSettingsModal from './components/GithubSettingsModal';
+import EveSettingsModal from './components/EveSettingsModal';
 
-app.initializers.add('flarum-auth-github', () => {
-  app.extensionSettings['flarum-auth-github'] = () => app.modal.show(new GithubSettingsModal());
+app.initializers.add('flarum-auth-eve', () => {
+  app.extensionSettings['flarum-auth-eve'] = () => app.modal.show(new EveSettingsModal());
 });

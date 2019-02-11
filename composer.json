@@ -1,6 +1,6 @@
 {
-    "name": "flarum/auth-github",
-    "description": "Allow users to log in with GitHub.",
+    "name": "instkffff/auth-eve",
+    "description": "Allow users to log in with EveOnline.",
     "type": "flarum-extension",
     "keywords": ["authentication"],
     "license": "MIT",
@@ -12,15 +12,15 @@
     ],
     "support": {
         "issues": "https://github.com/flarum/core/issues",
-        "source": "https://github.com/flarum/auth-github"
+        "source": "https://github.com/instkffff/auth-eve"
     },
     "require": {
         "flarum/core": "^0.1.0-beta.8",
-        "league/oauth2-github": "^2.0"
+        "instkffff/oauth2-eveonline-php7.1": "^1.0.1"
     },
     "autoload": {
         "psr-4": {
-            "Flarum\\Auth\\Github\\": "src/"
+            "Flarum\\Auth\\Eve\\": "src/"
         }
     },
     "extra": {
@@ -28,10 +28,10 @@
             "dev-master": "0.1.x-dev"
         },
         "flarum-extension": {
-            "title": "GitHub Login",
+            "title": "Eve Login",
             "icon": {
                 "name": "fab fa-github",
-                "backgroundColor": "#eee",
+                "backgroundColor": "black",
                 "color": "#333"
             }
         }

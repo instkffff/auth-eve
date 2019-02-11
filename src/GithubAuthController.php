@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Auth\Github;
+namespace Instkffff\Auth\Eve;
 
 use Exception;
 use Flarum\Forum\Auth\Registration;
 use Flarum\Forum\Auth\ResponseFactory;
 use Flarum\Settings\SettingsRepositoryInterface;
-use League\OAuth2\Client\Provider\Github;
-use League\OAuth2\Client\Provider\GithubResourceOwner;
+use Alcohol\OAuth2\Client\Provider\EveOnline;
+use League\OAuth2\Client\Provider\EveOnlineResourceOwner;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\RedirectResponse;
 
-class GithubAuthController implements RequestHandlerInterface
+class EveAuthController implements RequestHandlerInterface
 {
     /**
      * @var ResponseFactory
@@ -53,9 +53,9 @@ class GithubAuthController implements RequestHandlerInterface
     {
         $redirectUri = (string) $request->getAttribute('originalUri', $request->getUri())->withQuery('');
 
-        $provider = new Github([
-            'clientId' => $this->settings->get('flarum-auth-github.client_id'),
-            'clientSecret' => $this->settings->get('flarum-auth-github.client_secret'),
+        $provider = new EveOnline([
+            'clientId' => $this->settings->get('flarum-auth-eve.client_id'),
+            'clientSecret' => $this->settings->get('flarum-auth-eve.client_secret'),
             'redirectUri' => $redirectUri
         ]);
 
@@ -65,7 +65,7 @@ class GithubAuthController implements RequestHandlerInterface
         $code = array_get($queryParams, 'code');
 
         if (! $code) {
-            $authUrl = $provider->getAuthorizationUrl(['scope' => ['user:email']]);
+            $authUrl = $provider->getAuthorizationUrl();
             $session->put('oauth2state', $provider->getState());
 
             return new RedirectResponse($authUrl.'&display=popup');
@@ -81,35 +81,18 @@ class GithubAuthController implements RequestHandlerInterface
 
         $token = $provider->getAccessToken('authorization_code', compact('code'));
 
-        /** @var GithubResourceOwner $user */
+        /** @var EveResourceOwner $user */
         $user = $provider->getResourceOwner($token);
 
         return $this->response->make(
-            'github', $user->getId(),
+            'eveonline', $user->getId(),
             function (Registration $registration) use ($user, $provider, $token) {
                 $registration
-                    ->provideTrustedEmail($user->getEmail() ?: $this->getEmailFromApi($provider, $token))
-                    ->provideAvatar(array_get($user->toArray(), 'avatar_url'))
-                    ->suggestUsername($user->getNickname())
+                    ->provideTrustedEmail($user->getId().'@eve-info.net')
+                    ->provideAvatar(array_get('https://imageserver.eveonline.com/Character/'.$user->getId().'_512.jpg')
+                    ->suggestUsername($user->getName())
                     ->setPayload($user->toArray());
             }
         );
-    }
-
-    private function getEmailFromApi(Github $provider, AccessToken $token)
-    {
-        $url = $provider->apiDomain.'/user/emails';
-
-        $response = $provider->getResponse(
-            $provider->getAuthenticatedRequest('GET', $url, $token)
-        );
-
-        $emails = json_decode($response->getBody(), true);
-
-        foreach ($emails as $email) {
-            if ($email['primary'] && $email['verified']) {
-                return $email['email'];
-            }
-        }
     }
 }
