@@ -88,8 +88,8 @@ class EveAuthController implements RequestHandlerInterface
             'eveonline', $user->getId(),
             function (Registration $registration) use ($user, $provider, $token) {
                 $registration
-                    ->provideTrustedEmail($user->getId().'@eve-info.net')
-                    ->provideAvatar(array_get('https://imageserver.eveonline.com/Character/'.$user->getId().'_512.jpg')
+                    ->provideTrustedEmail($user->getId()."@eve-info.net")
+                    ->provideAvatar("https://imageserver.eveonline.com/Character/".$user->getId()."_512.jpg")
                     ->suggestUsername($user->getName())
                     ->setPayload($user->toArray());
             }
