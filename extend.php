@@ -10,7 +10,9 @@
  */
 
 use Instkffff\Auth\Eve\EveAuthController;
+use Instkffff\Auth\Eve\AddEveAttribute;
 use Flarum\Extend;
+use Illuminate\Contracts\Events\Dispatcher;
 
 return [
     (new Extend\Frontend('forum'))
@@ -24,6 +26,6 @@ return [
         ->get('/auth/eve', 'auth.eveonline', EveAuthController::class),
 
     function (Dispatcher $events) {
-        $events->subscribe(AddEveBioAttribute::class);
+        $events->subscribe(AddEveAttribute::class);
     },
 ];
