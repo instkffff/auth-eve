@@ -22,4 +22,8 @@ return [
 
     (new Extend\Routes('forum'))
         ->get('/auth/eve', 'auth.eveonline', EveAuthController::class),
+
+    function (Dispatcher $events) {
+        $events->subscribe(AddEveBioAttribute::class);
+    },
 ];

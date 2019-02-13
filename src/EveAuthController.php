@@ -91,6 +91,7 @@ class EveAuthController implements RequestHandlerInterface
                     ->provideTrustedEmail($user->getId()."@eve-info.net")
                     ->provideAvatar("https://imageserver.eveonline.com/Character/".$user->getId()."_512.jpg")
                     ->suggestUsername($user->getName())
+                    ->providerCharacterID($user->getId())
                     ->setPayload($user->toArray());
             }
         );
