@@ -10,7 +10,7 @@ app.initializers.add('instkffff-auth-eve', () => {
         className="Button LogInButton--eve"
         icon="fab fa-github"
         path="/auth/eve">
-        {app.translator.trans('instkffff-auth-eve.forum.log_in.with_eve_button')}
+        {'EveOnline Login'}
       </LogInButton>
     );
   });
